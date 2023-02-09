@@ -1,0 +1,11 @@
+version: "3.0"
+
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "tools_management"
+    ports:
+      - "5432:5432"
