@@ -1,10 +1,13 @@
 package com.desafio.tools.management.application.web.entities.requests;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class ToolRequest {
     private String title;
     private String link;
+    @Size(max = 256)
     private String description;
     private List<String> tags;
 
