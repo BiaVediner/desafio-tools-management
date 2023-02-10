@@ -6,28 +6,33 @@ import com.desafio.tools.management.domain.exceptions.AlreadyExistsException;
 import com.desafio.tools.management.domain.exceptions.NotFoundException;
 import com.desafio.tools.management.domain.exceptions.TagsLimitExceeded;
 import com.desafio.tools.management.domain.services.impl.ToolsServiceImpl;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/tools")
+@Api(value="ToolsController", description="Operations for tools")
 public class ToolsController {
     @Autowired
     private ToolsServiceImpl toolsService;
 
     @PostMapping
-    @Operation(summary = "Create tools")
+    @ApiOperation(value = "Create tools", response = CreateToolResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successful creation"),
-            @ApiResponse(responseCode = "400", description = "Tags amount is higher than 8 or Tool already exists"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(code = 201, message = "Successful creation"),
+            @ApiResponse(code = 400, message = "Tags amount is higher than 8 or Tool already exists"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
+    @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<CreateToolResponse> createTool(@RequestBody @Valid ToolRequest createToolRequest) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(
@@ -45,10 +50,11 @@ public class ToolsController {
     }
 
     @GetMapping
-    @Operation(summary = "List all tools created")
+    @ApiOperation(value = "List all tools created", response = GetToolsListResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+            @ApiResponse(code = 200, message = "Successful operation"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<GetToolsListResponse> getTools() {
         try {
@@ -63,11 +69,12 @@ public class ToolsController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get specific tool by id")
+    @ApiOperation(value = "Get specific tool by id", response = GetToolResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation"),
-            @ApiResponse(responseCode = "404", description = "Tool not found"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(code = 200, message = "Successful operation"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Tool not found"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<GetToolResponse> getTool(@PathVariable Long id) {
         try {
@@ -86,11 +93,12 @@ public class ToolsController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete specific tool by id")
+    @ApiOperation(value = "Delete specific tool by id", response = DeleteToolResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation"),
-            @ApiResponse(responseCode = "404", description = "Tool not found"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(code = 200, message = "Successful operation"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Tool not found"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<DeleteToolResponse> deleteTool(@PathVariable Long id) {
         try {
@@ -108,12 +116,13 @@ public class ToolsController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update specific tool by id")
+    @ApiOperation(value = "Update specific tool by id", response = UpdateToolResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation"),
-            @ApiResponse(responseCode = "404", description = "Tool not found"),
-            @ApiResponse(responseCode = "400", description = "Tags amount is higher than 8"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(code = 200, message = "Successful operation"),
+            @ApiResponse(code = 400, message = "Tags amount is higher than 8"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 404, message = "Tool not found"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<UpdateToolResponse> updateTool(@PathVariable Long id, @RequestBody @Valid ToolRequest toolRequest) {
         try {

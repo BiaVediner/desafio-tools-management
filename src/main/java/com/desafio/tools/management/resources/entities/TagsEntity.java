@@ -1,6 +1,6 @@
 package com.desafio.tools.management.resources.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.List;
 

@@ -15,6 +15,9 @@ public class ToolRequest {
         this.tags = tags;
     }
 
+    public ToolRequest() {
+    }
+
     public String getTitle() {
         return title;
     }

@@ -3,6 +3,7 @@ package com.desafio.tools.management.domain.entities;
 import com.desafio.tools.management.domain.entities.enums.ToolsStatus;
 import com.desafio.tools.management.resources.entities.TagsEntity;
 import com.desafio.tools.management.resources.entities.ToolsEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +16,9 @@ public class Tools {
     private String description;
     private ToolsStatus status;
     private List<String> tags;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
     public Tools(ToolsEntity tool) {

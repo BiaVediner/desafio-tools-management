@@ -2,7 +2,7 @@ package com.desafio.tools.management.resources.entities;
 
 import com.desafio.tools.management.application.web.entities.requests.ToolRequest;
 import com.desafio.tools.management.domain.entities.enums.ToolsStatus;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class ToolsEntity {
     private String description;
     @Enumerated(EnumType.STRING)
     private ToolsStatus status;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tools_tags",
             joinColumns = @JoinColumn(name = "tools_id"),
