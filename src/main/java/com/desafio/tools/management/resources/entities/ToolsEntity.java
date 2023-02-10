@@ -39,6 +39,16 @@ public class ToolsEntity {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public ToolsEntity(String title, String link, String description, ToolsStatus status, LocalDateTime createdAt) {
+        this.title = title;
+        this.link = link;
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.tags = new ArrayList<>();
+        this.updatedAt = LocalDateTime.now();
+    }
+
     public ToolsEntity(ToolRequest createToolRequest) {
         this.title = createToolRequest.getTitle();
         this.link = createToolRequest.getLink();

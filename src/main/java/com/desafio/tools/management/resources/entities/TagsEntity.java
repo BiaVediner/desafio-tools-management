@@ -17,6 +17,11 @@ public class TagsEntity {
         this.title = title;
     }
 
+    public TagsEntity(Long id, String title) {
+        this.tagsId = id;
+        this.title = title;
+    }
+
     public TagsEntity() {
     }
 

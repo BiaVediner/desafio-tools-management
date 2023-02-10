@@ -44,13 +44,13 @@ public class ToolsServiceImpl implements ToolsService {
         ToolsEntity foundTool = verifyTool(id);
 
         return new Tools(
-            foundTool
+                foundTool
         );
     }
 
     @Override
     public List<Tools> getTools() {
-        return toolsRepository.findByStatus(ToolsStatus.CREATED).stream().map(Tools::new).collect(Collectors.toList());
+        return toolsRepository.findByStatus().stream().map(Tools::new).collect(Collectors.toList());
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ToolsServiceImpl implements ToolsService {
     }
 
     private void validateTags(List<String> tags) throws TagsLimitExceeded {
-        if(tags.size() >= 8) {
+        if(tags.size() > 8) {
             throw new TagsLimitExceeded("Amount of tags is higher than 8");
         }
     }

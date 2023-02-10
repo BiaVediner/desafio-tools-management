@@ -6,7 +6,7 @@ public class GetToolResponse extends Response {
     private Tools tool;
 
     public GetToolResponse(Tools tool) {
-        super("Sucesso");
+        super("Success");
         this.tool = tool;
     }
 

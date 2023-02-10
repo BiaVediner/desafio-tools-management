@@ -1,15 +1,19 @@
 package com.desafio.tools.management.application.web.entities.requests;
 
-import jakarta.validation.constraints.Max;
-
 import java.util.List;
 
 public class ToolRequest {
     private String title;
     private String link;
-    @Max(256)
     private String description;
     private List<String> tags;
+
+    public ToolRequest(String title, String link, String description, List<String> tags) {
+        this.title = title;
+        this.link = link;
+        this.description = description;
+        this.tags = tags;
+    }
 
     public String getTitle() {
         return title;
